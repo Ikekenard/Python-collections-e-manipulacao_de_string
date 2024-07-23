@@ -40,9 +40,34 @@ class ExtratorURL:
           else:
                valor = self.get_url_parametros()[indice_valor:indice_e_comercial]
           return valor.title()
+     
+     def __len__(self):
+          return len(self.url)
+     
+     def __str__(self):
+          return f'URL: {self.url} \nParâmetros: {self.get_url_parametros()} \nURL Base: {self.get_url_base()}'
 
+     def __eq__(self, other):
+          return self.url == other.url
 
+extrator_url = ExtratorURL('bytebank.com/cambio?quantidade=100&moedaOrigem=Real&moedaDestino=dolar')
+# Testes
+# print('O tamanho da URL: ', len(extrator))
+# print(extrator)
+# valor_quantidade = extrator.get_valor_parametro('quantidade')
+# print(valor_quantidade)
 
-extrator = ExtratorURL('bytebank.com/cambio?quantidade=100&moedaOrigem=real&moedaDestino=dolar')
-valor_quantidade = extrator.get_valor_parametro('quantidade')
-print(valor_quantidade)
+# Desafio do curso
+valor_dolar = 5.58  # 1 dólar = 5.58 reais em 23.07.2024
+moeda_origem = extrator_url.get_valor_parametro('moedaOrigem')
+moeda_destino = extrator_url.get_valor_parametro('moedaDestino')
+quantidade = extrator_url.get_valor_parametro('quantidade')
+
+if moeda_origem == 'Real' and moeda_destino == 'Dolar':
+    valor_conversao = round(int(quantidade) / valor_dolar,2)
+    print(f'O valor de R$ {quantidade} reais é igual a $ {str(valor_conversao)} dólares.')
+elif moeda_origem == 'Dolar' and moeda_destino == 'Real':
+    valor_conversao = round(int(quantidade) * valor_dolar,2)
+    print(f'O valor de $ {quantidade} dólares é igual a R$ {str(valor_conversao)} reais.')
+else:
+    print(f'Câmbio de {moeda_origem} para {moeda_destino} não está disponível.')

@@ -19,5 +19,3 @@ Este repositório agrupa três cursos focados em coleções Python e manipulaç�
 Cada diretório de curso contém um README.md com instruções específicas para o respectivo curso. Siga as instruções para aprender e praticar os conceitos apresentados.
 
 ---
-
-Mantenha este repositório atualizado à medida que avança nos cursos. Bons estudos!

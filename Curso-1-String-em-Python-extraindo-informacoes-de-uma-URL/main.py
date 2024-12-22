@@ -1,7 +1,5 @@
 # Url abse
-# url = "bytebank.com/cambio?quantidade=100&moedaOrigem=real&moedaDestino=dolar"
-url = ''
-print(f'\nUrl: {url}\n')
+url = "bytebank.com/cambio?quantidade=100&moedaOrigem=real&moedaDestino=dolar"
 
 # Limpeza URL usando strip()
 url = url.strip()

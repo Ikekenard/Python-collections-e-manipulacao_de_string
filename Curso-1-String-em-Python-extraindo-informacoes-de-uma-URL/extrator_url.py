@@ -1,5 +1,7 @@
 import re
 
+
+
 class ExtratorURL:
      def __init__(self,url):
           self.url = self.limpa_url(url)
@@ -13,7 +15,8 @@ class ExtratorURL:
      
      def valida_url(self):
           if not self.url:
-               raise ValueError(f'A url está vázia')   
+               raise ValueError(f'A url está vázia')
+          
           padrão_url = re.compile('(http(s)?://)?(www.)?bytebank.com(.br)?/cambio')
           match = padrão_url.match(self.url)
           if not match:
@@ -50,24 +53,17 @@ class ExtratorURL:
      def __eq__(self, other):
           return self.url == other.url
 
-extrator_url = ExtratorURL('bytebank.com/cambio?quantidade=100&moedaOrigem=Real&moedaDestino=dolar')
-# Testes
-# print('O tamanho da URL: ', len(extrator))
-# print(extrator)
-# valor_quantidade = extrator.get_valor_parametro('quantidade')
-# print(valor_quantidade)
+url = 'bytebank.com/cambio?quantidade=100&moedaOrigem=Real&moedaDestino=dolar'
 
-# Desafio do curso
-valor_dolar = 5.58  # 1 dólar = 5.58 reais em 23.07.2024
-moeda_origem = extrator_url.get_valor_parametro('moedaOrigem')
-moeda_destino = extrator_url.get_valor_parametro('moedaDestino')
-quantidade = extrator_url.get_valor_parametro('quantidade')
+extrator_url = ExtratorURL(url)
+extrator_url_2 = ExtratorURL(url)
 
-if moeda_origem == 'Real' and moeda_destino == 'Dolar':
-    valor_conversao = round(int(quantidade) / valor_dolar,2)
-    print(f'O valor de R$ {quantidade} reais é igual a $ {str(valor_conversao)} dólares.')
-elif moeda_origem == 'Dolar' and moeda_destino == 'Real':
-    valor_conversao = round(int(quantidade) * valor_dolar,2)
-    print(f'O valor de $ {quantidade} dólares é igual a R$ {str(valor_conversao)} reais.')
-else:
-    print(f'Câmbio de {moeda_origem} para {moeda_destino} não está disponível.')
+print("O tamanho da URL é: ", len(extrator_url))
+print("URL completa: ", extrator_url)
+
+# Verifica que duas instâncias com a mesma URL são iguais
+print("extrator_url == extrator_url_2? ", extrator_url == extrator_url_2)
+
+# Busca o valor do parâmetro quantidade
+valor_quantidade = extrator_url.get_valor_parametro("quantidade")
+print("Valor do parâmetro 'quantidade': ", valor_quantidade)
